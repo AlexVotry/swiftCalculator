@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA0994041E747D1100DBEE6E /* DisplayBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0994031E747D1100DBEE6E /* DisplayBtn.swift */; };
 		FA15D40E1E706AA1001B68D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA15D40D1E706AA1001B68D9 /* AppDelegate.swift */; };
 		FA15D4101E706AA1001B68D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA15D40F1E706AA1001B68D9 /* ViewController.swift */; };
 		FA15D4131E706AA1001B68D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA15D4111E706AA1001B68D9 /* Main.storyboard */; };
 		FA15D4151E706AA1001B68D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA15D4141E706AA1001B68D9 /* Assets.xcassets */; };
 		FA15D4181E706AA1001B68D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA15D4161E706AA1001B68D9 /* LaunchScreen.storyboard */; };
+		FA15D4211E707A90001B68D9 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA15D4201E707A90001B68D9 /* Calculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA0994031E747D1100DBEE6E /* DisplayBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayBtn.swift; sourceTree = "<group>"; };
 		FA15D40A1E706AA1001B68D9 /* HWCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HWCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA15D40D1E706AA1001B68D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA15D40F1E706AA1001B68D9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +25,7 @@
 		FA15D4141E706AA1001B68D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA15D4171E706AA1001B68D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA15D4191E706AA1001B68D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA15D4201E707A90001B68D9 /* Calculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +58,24 @@
 		FA15D40C1E706AA1001B68D9 /* HWCalc */ = {
 			isa = PBXGroup;
 			children = (
-				FA15D40D1E706AA1001B68D9 /* AppDelegate.swift */,
+				FA15D41F1E706AC9001B68D9 /* unused */,
 				FA15D40F1E706AA1001B68D9 /* ViewController.swift */,
 				FA15D4111E706AA1001B68D9 /* Main.storyboard */,
+				FA15D4201E707A90001B68D9 /* Calculator.swift */,
+				FA0994031E747D1100DBEE6E /* DisplayBtn.swift */,
+			);
+			path = HWCalc;
+			sourceTree = "<group>";
+		};
+		FA15D41F1E706AC9001B68D9 /* unused */ = {
+			isa = PBXGroup;
+			children = (
+				FA15D40D1E706AA1001B68D9 /* AppDelegate.swift */,
 				FA15D4141E706AA1001B68D9 /* Assets.xcassets */,
 				FA15D4161E706AA1001B68D9 /* LaunchScreen.storyboard */,
 				FA15D4191E706AA1001B68D9 /* Info.plist */,
 			);
-			path = HWCalc;
+			name = unused;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +152,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA15D4101E706AA1001B68D9 /* ViewController.swift in Sources */,
+				FA0994041E747D1100DBEE6E /* DisplayBtn.swift in Sources */,
 				FA15D40E1E706AA1001B68D9 /* AppDelegate.swift in Sources */,
+				FA15D4211E707A90001B68D9 /* Calculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +281,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = alexvotry.com.alexvotry.HWCalc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -278,6 +295,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = alexvotry.com.alexvotry.HWCalc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -300,6 +318,7 @@
 				FA15D41E1E706AA1001B68D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

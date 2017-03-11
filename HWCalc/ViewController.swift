@@ -9,17 +9,42 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var display: UILabel!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    @IBOutlet weak var topDisplay: UILabel!
+    private var calculator = Calculator()
+    private var recentNumber = DisplayBtn()
+    
+    var isTyping = false
+    var noDecimal = true
+    
+    var displayValue : Double {
+        get {
+            return Double(display.text!)!
+        }
+        set {
+            return display.text = String(newValue)
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func numberBtn(_ sender: UIButton) {
+        display.text! = recentNumber.getNum(sender.currentTitle!)
+        isTyping = true
     }
-
+    
+    @IBAction func operators(_ sender: UIButton) {
+        if isTyping {
+            calculator.setNum(displayValue) //sends number to use to calculator
+            isTyping = false
+            recentNumber.displayNumber = nil
+        }
+        if let mathFunction = sender.currentTitle {
+            calculator.performOp(mathFunction)
+        }
+        if let result = calculator.result {
+            displayValue = result
+        }
+    }
 
 }
 
