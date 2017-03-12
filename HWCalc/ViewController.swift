@@ -16,7 +16,6 @@ class ViewController: UIViewController {
     private var recentNumber = DisplayBtn()
     
     var isTyping = false
-    var noDecimal = true
     
     var displayValue : Double {
         get {
@@ -28,8 +27,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func numberBtn(_ sender: UIButton) {
-        let digit = recentNumber.getNum(sender.currentTitle!)
-        display.text! = digit
+        display.text! = recentNumber.getNum(sender.currentTitle!)
         topDisplay.text! = recentNumber.writeDisplay(sender.currentTitle!)
         isTyping = true
     }
@@ -39,7 +37,6 @@ class ViewController: UIViewController {
             calculator.setNum(displayValue) //sends number to use to calculator
             isTyping = false
             topDisplay.text! = recentNumber.writeEquation(sender.currentTitle!)
-            
         }
         if let mathFunction = sender.currentTitle {
             calculator.performOp(mathFunction)
