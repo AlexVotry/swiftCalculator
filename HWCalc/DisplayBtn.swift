@@ -10,8 +10,12 @@ import Foundation
 
 struct DisplayBtn {
 
-    var numDecimal = 0
-    var displayNumber: String?
+    private var numDecimal = 0
+    private var displayNumber: String?
+    private var equation: String?
+//    private var firstNum = String?
+    private var secondNum: String!
+    private var stillFirst = true
 
     mutating func noDecimal(_ decimal: String) -> Bool {
         if decimal == "." {
@@ -38,6 +42,34 @@ struct DisplayBtn {
         return displayNumber!
     }
 
+    mutating func writeEquation(_ operand: String) -> String {
+        displayNumber = nil
+        stillFirst = false
+        if operand == "=" {
+            let fininshed = equation! + secondNum + "="
+            equation = nil
+            secondNum = nil
+            stillFirst = true
+            return fininshed
+        } else {
+            equation!.append(operand)
+        return equation! + "..."
+        }
+    }
 
+    mutating func writeDisplay(_ number: String) -> String {
+        if equation != nil {
+            if stillFirst {
+                equation! = displayNumber!
+                secondNum = ""
+            } else {
+            secondNum = displayNumber!
+            }
+        } else {
+            equation = number
+            secondNum = ""
+        }
+        return equation! + secondNum! + "..."
+    }
 
 }

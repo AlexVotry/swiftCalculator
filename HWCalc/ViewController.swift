@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var display: UILabel!
-
+    
     @IBOutlet weak var topDisplay: UILabel!
     private var calculator = Calculator()
     private var recentNumber = DisplayBtn()
@@ -28,7 +28,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func numberBtn(_ sender: UIButton) {
-        display.text! = recentNumber.getNum(sender.currentTitle!)
+        let digit = recentNumber.getNum(sender.currentTitle!)
+        display.text! = digit
+        topDisplay.text! = recentNumber.writeDisplay(sender.currentTitle!)
         isTyping = true
     }
     
@@ -36,7 +38,8 @@ class ViewController: UIViewController {
         if isTyping {
             calculator.setNum(displayValue) //sends number to use to calculator
             isTyping = false
-            recentNumber.displayNumber = nil
+            topDisplay.text! = recentNumber.writeEquation(sender.currentTitle!)
+            
         }
         if let mathFunction = sender.currentTitle {
             calculator.performOp(mathFunction)
@@ -45,6 +48,6 @@ class ViewController: UIViewController {
             displayValue = result
         }
     }
-
+    
 }
 
