@@ -11,12 +11,16 @@ import Foundation
 struct Calculator {
 
     private var displayNum: Double?
+    private var memory: Double?
 
     enum Operation {
         case constant(Double)
         case unaryOperation((Double) -> Double)
         case binaryOperation((Double, Double) -> Double)
         case equals
+        case clear
+        case memory((Double)->Double)
+        case memoryClear
     }
 
     private var operations: Dictionary<String, Operation> = [
@@ -29,13 +33,17 @@ struct Calculator {
         "÷" : Operation.binaryOperation({$0 / $1}),
         "−" : Operation.binaryOperation({$0 - $1}),
         "+" : Operation.binaryOperation({$0 + $1}),
-        "=" : Operation.equals
+        "%" : Operation.binaryOperation({$1 * ($0/100)}),
+        "=" : Operation.equals,
+        "m" : Operation.memory({$0}),
+        "C" : Operation.clear,
+        "mc": Operation.memoryClear
         ]
 
     mutating func performOp(_ symbol: String) {
         if let operation = operations[symbol] {
             switch operation {
-            case .constant (let value):
+            case .constant(let value):
                 displayNum = value
             case .unaryOperation(let thisFunc):
                 if displayNum != nil {
@@ -46,6 +54,19 @@ struct Calculator {
                     firstNum = saveFirstNumWithOperand(function: thisFunc, first: displayNum!)
                     displayNum = nil
                 }
+            case .memory(let saveThis):
+                if memory == nil  {
+                    if let newMemory = displayNum {
+                        memory = saveThis(newMemory)
+                    }
+                } else {
+                   displayNum = memory
+                }
+            case .clear:
+                displayNum = 0
+                firstNum = nil
+            case .memoryClear:
+                memory = nil
             case .equals:
                 finishOperation()
             }

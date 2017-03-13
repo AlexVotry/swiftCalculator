@@ -16,7 +16,7 @@ struct DisplayBtn {
     private var secondNum: String!
     private var stillFirst = true
     
-    mutating func noDecimal(_ decimal: String) -> Bool {
+    private mutating func noDecimal(_ decimal: String) -> Bool {
         if decimal == "." {
             numDecimal += 1
         }
@@ -42,21 +42,40 @@ struct DisplayBtn {
     }
     
     mutating func writeEquation(_ operand: String) -> String {
+        equation = (equation == nil ? operand : equation)
         displayNumber = nil
         stillFirst = false
-        if operand == "=" {
-            let fininshed = equation! + secondNum + "="
-            equation = nil
-            secondNum = nil
-            stillFirst = true
-            return fininshed
-        } else {
+        
+        switch operand {
+        case "π":
+            return equation! + " ..."
+        case "√", "sin", "cos":
+            let finished = operand + "(" + equation! + ") = "
+            reset()
+            return finished
+        case "=":
+            let finished = equation! + secondNum + "="
+            reset()
+            print("equals: \(stillFirst)")
+            return finished
+        case "m", "mc":
+            return equation! + "(m)"
+        case "C":
+            reset()
+            return "ready"
+        default:
             equation!.append(operand)
-            return equation! + "..."
+            stillFirst = false
+            return equation! + " ..."
         }
     }
-    
-    mutating func writeDisplay(_ number: String) -> String {
+    private mutating func reset() {
+        equation = nil
+        secondNum = nil
+        stillFirst = true
+    }
+
+    mutating func writeDisplay(_ number: String?) -> String {
         if equation != nil {
             if stillFirst {
                 equation! = displayNumber!
@@ -65,10 +84,10 @@ struct DisplayBtn {
                 secondNum = displayNumber!
             }
         } else {
-            equation = number
+            equation = number!
             secondNum = ""
         }
-        return equation! + secondNum! + "..."
+        return equation! + secondNum! + " ..."
     }
     
 }

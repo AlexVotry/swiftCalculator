@@ -36,10 +36,11 @@ class ViewController: UIViewController {
         if isTyping {
             calculator.setNum(displayValue) //sends number to use to calculator
             isTyping = false
-            topDisplay.text! = recentNumber.writeEquation(sender.currentTitle!)
+           
         }
         if let mathFunction = sender.currentTitle {
             calculator.performOp(mathFunction)
+            topDisplay.text! = recentNumber.writeEquation(mathFunction)
         }
         if let result = calculator.result {
             displayValue = result
