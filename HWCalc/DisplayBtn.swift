@@ -13,8 +13,9 @@ struct DisplayBtn {
     private var numDecimal = 0
     private var displayNumber: String?
     private var equation: String?
-    private var secondNum: String!
+    private var secondNum = ""
     private var stillFirst = true
+    private var mem: String?
     
     private mutating func noDecimal(_ decimal: String) -> Bool {
         if decimal == "." {
@@ -42,39 +43,49 @@ struct DisplayBtn {
     }
     
     mutating func writeEquation(_ operand: String) -> String {
-        equation = (equation == nil ? operand : equation)
         displayNumber = nil
         stillFirst = false
         
         switch operand {
         case "π":
-            return equation! + " ..."
+            equation = (equation == nil ? operand : equation)
+            secondNum = (secondNum == "" && equation != "π" ? operand : secondNum)
+            return equation! + secondNum + " ..."
         case "√", "sin", "cos":
-            let finished = operand + "(" + equation! + ") = "
-            reset()
-            return finished
+            if equation != nil {
+                let sqrt = (mem != nil ? mem! : equation!)
+                let finished = operand + "(" + sqrt + ") = "
+                reset(nil)
+                return finished
+            } else {
+                return "ready"
+            }
         case "=":
-            let finished = equation! + secondNum + "="
-            reset()
-            print("equals: \(stillFirst)")
-            return finished
+            let finished = equation! + secondNum
+            reset(finished)
+            return finished + "="
         case "m", "mc":
             return equation! + "(m)"
         case "C":
-            reset()
+            reset(nil)
             return "ready"
         default:
-            equation!.append(operand)
-            stillFirst = false
-            return equation! + " ..."
+            if equation != nil {
+                equation!.append(operand)
+                stillFirst = false
+                return equation! + " ..."
+            } else {
+                return "ready"
+            }
         }
     }
-    private mutating func reset() {
-        equation = nil
-        secondNum = nil
+    private mutating func reset(_ finished: String? ) {
+        mem = (secondNum == "" ? equation : finished)
+        equation = ""
+        secondNum = ""
         stillFirst = true
     }
-
+    
     mutating func writeDisplay(_ number: String?) -> String {
         if equation != nil {
             if stillFirst {
@@ -87,7 +98,7 @@ struct DisplayBtn {
             equation = number!
             secondNum = ""
         }
-        return equation! + secondNum! + " ..."
+        return equation! + secondNum + " ..."
     }
     
 }

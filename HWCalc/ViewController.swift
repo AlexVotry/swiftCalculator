@@ -28,13 +28,13 @@ class ViewController: UIViewController {
     
     @IBAction func numberBtn(_ sender: UIButton) {
         display.text! = recentNumber.getNum(sender.currentTitle!)
-        topDisplay.text! = recentNumber.writeDisplay(sender.currentTitle!)
+    topDisplay.text! = recentNumber.writeDisplay(sender.currentTitle!)
         isTyping = true
     }
     
     @IBAction func operators(_ sender: UIButton) {
         if isTyping {
-            calculator.setNum(displayValue) //sends number to use to calculator
+            calculator.setNum(displayValue) //sends number to calculator
             isTyping = false
            
         }
